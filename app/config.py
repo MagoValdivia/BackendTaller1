@@ -12,4 +12,4 @@ class Config:
         "postgresql://postgresuser:postgresUser@38.242.234.236:5432/taller01_dev"
     )
     
-    SQLALCHEMY_TRACK_MODIFICIATIONS = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False

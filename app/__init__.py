@@ -6,7 +6,6 @@ from flask_migrate import Migrate
 from app.config import Config
 from sqlalchemy import text
 
-
 db = SQLAlchemy()
 socketio = SocketIO(cors_allowed_origins="*")
 migrate = Migrate()
@@ -21,7 +20,7 @@ def create_app():
     CORS(app)
     socketio.init_app(app)
 
-    # Importar y registrar rutas
+    # Importar y registrar rutas dentro de la función de creación de la app
     from app.routes.auth_routes import auth_bp
     from app.routes.chat_routes import chat_bp
 

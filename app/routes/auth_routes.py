@@ -1,7 +1,7 @@
 # Rutas de autenticaci�n
 
 from flask import request, jsonify, Blueprint
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 from app.models.user import User  # importa tu modelo
 
@@ -29,3 +29,15 @@ def register():
     db.session.commit()
 
     return jsonify({'message': 'Usuario registrado con éxito'}), 201
+
+@auth_bp.route('/login', methods=['POST'])
+def login():
+    username = request.json.get('username')
+    password = request.json.get('password')
+
+    user = User.query.filter_by(username=username).first()
+
+    if not user or not check_password_hash(user.password_hash, password):
+        return jsonify({"message": "Credenciales incorrectas"}), 401
+
+    return jsonify({"message": "Inicio de sesión exitoso"}), 200
