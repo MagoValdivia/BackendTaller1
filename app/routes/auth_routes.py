@@ -32,10 +32,10 @@ def register():
 
 @auth_bp.route('/login', methods=['POST'])
 def login():
-    username = request.json.get('username')
+    email = request.json.get('email')
     password = request.json.get('password')
 
-    user = User.query.filter_by(username=username).first()
+    user = User.query.filter_by(email=email).first()
 
     if not user or not check_password_hash(user.password_hash, password):
         return jsonify({"message": "Credenciales incorrectas"}), 401
